@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Rocket, Target } from 'lucide-react';
+import { Sparkles, Rocket, Target, Shield } from 'lucide-react';
 
 const ProjectStatus: React.FC = () => {
   const completedMissions = 3;
   const totalMissions = 7;
   const recruitedAllies = 2;
   const [starDate, setStarDate] = useState('');
+  const rankProgress = 37; // Progress towards next rank
 
   useEffect(() => {
     const calculateStarDate = () => {
@@ -31,33 +32,58 @@ const ProjectStatus: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-cyan-400 to-green-400"></div>
       
       <div className="flex flex-col sm:flex-row justify-between gap-4">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <Sparkles size={24} className="text-purple-400" />
-            <h2 className="text-xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-300 to-green-400">
-              Welcome back, Commander Vega
-            </h2>
+        <div className="flex gap-4">
+          {/* Profile Badge */}
+          <div className="relative">
+            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 p-0.5">
+              <div className="w-full h-full rounded-lg bg-gray-900 flex items-center justify-center relative overflow-hidden">
+                <img 
+                  src="/assets/chevron_rank_badge.png" 
+                  alt="Rank Badge" 
+                  className="w-12 h-12 object-contain relative z-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 animate-pulse-slow"></div>
+              </div>
+            </div>
+            <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 p-0.5">
+              <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
+                <Shield size={14} className="text-cyan-400" />
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-2 font-mono">
-            <div className="flex items-center gap-2 text-cyan-400">
-              <Target size={16} />
-              <span>Status: Phase 2 — Airdrop Initiated</span>
-            </div>
-            
-            <div className="flex items-center gap-4 text-gray-400">
-              <div className="flex items-center gap-2">
-                <Rocket size={16} className="text-purple-400" />
-                <span>Missions: {completedMissions}/{totalMissions}</span>
+          {/* Profile Info */}
+          <div className="space-y-2">
+            <div>
+              <h2 className="text-xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-300 to-green-400">
+                Commander Vega
+              </h2>
+              <div className="text-sm font-mono text-gray-400">
+                Rank: Field Agent
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                <span>Allies: {recruitedAllies}</span>
+            </div>
+
+            {/* Rank Progress */}
+            <div className="relative">
+              <div className="absolute -left-2 -top-2 w-6 h-6 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center">
+                <Sparkles size={12} className="text-cyan-400" />
+              </div>
+              <div className="h-2 bg-gray-800/50 rounded-full overflow-hidden mt-2">
+                <div 
+                  className="h-full bg-gradient-to-r from-purple-500 via-cyan-400 to-green-400 transition-all duration-1000 ease-out"
+                  style={{ width: `${rankProgress}%` }}
+                >
+                  <div className="w-full h-full opacity-50 animate-pulse"></div>
+                </div>
+              </div>
+              <div className="mt-1 text-[10px] font-mono text-gray-500">
+                {rankProgress}% to Strategic Commander
               </div>
             </div>
           </div>
         </div>
 
+        {/* System Status */}
         <div className="font-mono text-xs space-y-2 sm:min-w-[200px] sm:border-l sm:border-purple-500/20 sm:pl-4">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
