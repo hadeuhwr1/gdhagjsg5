@@ -29,7 +29,7 @@ const DashboardLayout: React.FC = () => {
       <Sidebar isOpen={sidebarOpen} toggle={() => setSidebarOpen(!sidebarOpen)} />
 
       <div className="relative flex-1 flex flex-col overflow-hidden">
-        <header className="relative z-10 px-6 py-4 bg-gray-900/50 backdrop-blur-md border-b border-purple-900/30">
+        <header className="relative z-10 px-3 sm:px-6 py-4 bg-gray-900/50 backdrop-blur-md border-b border-purple-900/30">
           <div className="flex justify-end">
             <WalletButton />
           </div>
